@@ -60,6 +60,7 @@
             cursor: pointer;
             margin-top: 15px;
             box-shadow: 0 4px 10px rgba(213, 63, 140, 0.3);
+            width: 100%;
         }
     </style>
 </head>
@@ -73,27 +74,33 @@
         <p><strong>Live CFU Count:</strong> 10 Billion CFU</p>
         <p><strong>Activation Date:</strong> <span id="date">Loading...</span></p>
         
-        <button class="music-btn" onclick="playSodaSong()">🎵 Play Soda Pop Anthem</button>
+        <!-- Embedded YouTube Audio for Saja Boys - Soda Pop -->
+        <button class="music-btn" onclick="toggleMusic()">🎶 Play Saja Boys - Soda Pop</button>
     </div>
 
-    <!-- Hidden audio element using a cheerful synthpop/pop beat audio loop -->
-    <audio id="sodaSong" loop>
-        <source src="https://actions.google.com/sounds/v1/ambiences/coffee_shop.ogg" type="audio/ogg">
-    </audio>
+    <div id="player-container" style="display:none;">
+        <iframe id="ytPlayer" width="0" height="0" src="https://www.youtube.com/embed/_uu_izpVSEc?enablejsapi=1&autoplay=0" allow="autoplay"></iframe>
+    </div>
 
     <script>
         // Automatically display current date
         document.getElementById('date').innerText = new Date().toLocaleDateString();
 
-        function playSodaSong() {
-            var music = document.getElementById('sodaSong');
+        let isPlaying = false;
+        function toggleMusic() {
+            var iframe = document.getElementById('ytPlayer');
             var btn = document.querySelector('.music-btn');
-            if (music.paused) {
-                music.play();
-                btn.innerText = "⏸️ Pause Soda Pop Anthem";
+            
+            if (!isPlaying) {
+                // Reload iframe with autoplay enabled
+                iframe.src = "https://www.youtube.com/embed/_uu_izpVSEc?enablejsapi=1&autoplay=1";
+                btn.innerText = "⏸️ Pause Soda Pop Song";
+                isPlaying = true;
             } else {
-                music.pause();
-                btn.innerText = "🎵 Play Soda Pop Anthem";
+                // Stop music by resetting src without autoplay
+                iframe.src = "https://www.youtube.com/embed/_uu_izpVSEc?enablejsapi=1&autoplay=0";
+                btn.innerText = "🎶 Play Saja Boys - Soda Pop";
+                isPlaying = false;
             }
         }
     </script>
