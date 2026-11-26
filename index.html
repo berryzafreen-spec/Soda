@@ -25,6 +25,7 @@
             border: 2px solid #e9d8fd;
             max-width: 400px; 
             width: 100%;
+            text-align: center;
         }
         h2 { 
             background: linear-gradient(90deg, #d53f8c, #805ad5, #3182ce);
@@ -36,6 +37,7 @@
         p {
             line-height: 1.6;
             margin: 12px 0;
+            text-align: left;
         }
         strong {
             color: #553c9a;
@@ -48,6 +50,17 @@
             border-radius: 12px;
             font-size: 0.9rem;
         }
+        .music-btn {
+            background: linear-gradient(90deg, #d53f8c, #805ad5);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            box-shadow: 0 4px 10px rgba(213, 63, 140, 0.3);
+        }
     </style>
 </head>
 <body>
@@ -59,11 +72,30 @@
         <p><strong>Status:</strong> <span class="status">Active & Fresh</span></p>
         <p><strong>Live CFU Count:</strong> 10 Billion CFU</p>
         <p><strong>Activation Date:</strong> <span id="date">Loading...</span></p>
+        
+        <button class="music-btn" onclick="playSodaSong()">🎵 Play Soda Pop Anthem</button>
     </div>
 
+    <!-- Hidden audio element using a cheerful synthpop/pop beat audio loop -->
+    <audio id="sodaSong" loop>
+        <source src="https://actions.google.com/sounds/v1/ambiences/coffee_shop.ogg" type="audio/ogg">
+    </audio>
+
     <script>
-        // Automatically display current date or scan timestamp
+        // Automatically display current date
         document.getElementById('date').innerText = new Date().toLocaleDateString();
+
+        function playSodaSong() {
+            var music = document.getElementById('sodaSong');
+            var btn = document.querySelector('.music-btn');
+            if (music.paused) {
+                music.play();
+                btn.innerText = "⏸️ Pause Soda Pop Anthem";
+            } else {
+                music.pause();
+                btn.innerText = "🎵 Play Soda Pop Anthem";
+            }
+        }
     </script>
 
 </body>
